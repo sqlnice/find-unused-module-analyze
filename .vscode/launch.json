@@ -1,0 +1,12 @@
+{
+    "configurations": [
+        {
+            "name": "debug",
+            "type": "node",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "runtimeExecutable": null,
+            "args" : ["test"]
+          },
+    ]
+}
