@@ -37,14 +37,13 @@ function moduleResolver(curModulePath, requirePath) {
   }
 
   requirePath = resolve(dirname(curModulePath), requirePath);
-
   // 过滤掉第三方模块
   if (requirePath.includes('node_modules')) {
     return '';
   }
 
   requirePath = completeModulePath(requirePath);
-
+  // 保存遍历过的路径
   if (visitedModules.has(requirePath)) {
     return '';
   } else {
@@ -64,7 +63,6 @@ function completeModulePath(modulePath) {
       let tryPath = resolvePath(EXTS[i]);
       // 路径是否存在
       if (fs.existsSync(tryPath)) {
-        console.log(tryPath);
         return tryPath;
       }
     }
@@ -175,12 +173,18 @@ function traverseJsModule(curModulePath, callback) {
   });
 
   traverse(ast, {
+    // 获取当前文件夹下的import节点
     ImportDeclaration(path) {
+      console.log(chalk.blue('获取当前文件夹下的import节点:'));
+      const node = path.get('source.value');
+      console.log(path.get('source.value').node);
       const subModulePath = moduleResolver(curModulePath, path.get('source.value').node);
       if (!subModulePath) {
         return;
       }
+      // 调用回调，把路径保存进useModule
       callback && callback(subModulePath);
+      // 递归调用子路径
       traverseModule(subModulePath, callback);
     },
     CallExpression(path) {

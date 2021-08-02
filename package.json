@@ -25,5 +25,8 @@
     "postcss": "^8.2.12",
     "postcss-less": "^4.0.1",
     "postcss-scss": "^3.0.5"
+  },
+  "devDependencies": {
+    "axios": "^0.21.1"
   }
 }

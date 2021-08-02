@@ -7,7 +7,10 @@
   遍历模块
     补齐路径
     根据文件后缀分别进行递归
-
+      JS:读取文件内容 - 使用@bable/parse转成ast树 - 使用@bable/traverse - 保存子路径 - 递归调用子路径
+      CSS:读取文件内容 - 使用@bable/parse转成ast树 - 是否含有import/url引用的内容
+                                                                               - import引用 解析路径 保存子路径 - 递归调用子路径
+                                                                               - url引用 解析路径 保存子路径
 
 2.遍历，保存路径
 

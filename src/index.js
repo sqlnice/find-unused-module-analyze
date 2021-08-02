@@ -21,7 +21,6 @@ function findUnusedModule(options) {
   const allFiles = fastGlob.sync(includes).map((item) => normalize(item));
   const entryModules = [];
   const usedModules = [];
-
   setRequirePathResolver(resolveRequirePath);
   entries.forEach((entry) => {
     const entryPath = resolve(cwd, entry);
@@ -30,7 +29,6 @@ function findUnusedModule(options) {
       usedModules.push(modulePath);
     });
   });
-
   const unusedModules = allFiles.filter((filePath) => {
     const resolvedFilePath = resolve(filePath);
     return !entryModules.includes(resolvedFilePath) && !usedModules.includes(resolvedFilePath);
